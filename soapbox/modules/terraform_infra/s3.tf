@@ -2,9 +2,9 @@ resource "aws_s3_bucket" "tfstate_s3" {
   bucket = "${local.name_prefix}-tfstate-s3"
 
   # By default var.allow_destroy is false to prevent accidental destruction of S3 bucket
-  force_destroy = true
+  force_destroy = false
   lifecycle {
-    prevent_destroy = false
+    prevent_destroy = true
   }
 
   tags = {
