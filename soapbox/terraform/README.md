@@ -1,0 +1,1 @@
+These Terraform configs show a setup without Terragrunt 

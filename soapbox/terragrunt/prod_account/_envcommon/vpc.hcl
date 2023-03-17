@@ -18,8 +18,10 @@ locals {
 # needs to deploy a different module version, it should redefine this block with a different ref to override the
 # deployed version.
 terraform {
-  # For dev and local development, it is OK to use local directories for modules
+  # For prod, we want to use Terraform modules tested in dev and qa and
+  # committed into git
+  # If we need to override and use local directories for Terraform modules,
+  # use the following command line
   # terragrunt apply --terragrunt-source=../../../../..//modules/simple_vpc
-  #source = "${local.module_source_url}?ref=main"
-  source = "../../../../..//modules/simple_vpc"
+  source = "${local.module_source_url}?ref=main"
 }
