@@ -35,8 +35,8 @@ locals {
 # deployed version.
 terraform {
   # For dev and local development, it is convenient to use local directories for modules
-  source = "../../../../..//modules/${local.module_name}"
-  #source = "${local.module_source_url}?ref=main"
+  # source = "../../../../..//modules/${local.module_name}"
+  source = "${local.module_source_url}?ref=main"
 }
 
 # Terragrunt dependency and dependencies blocks are different.

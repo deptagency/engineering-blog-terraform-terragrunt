@@ -3,7 +3,7 @@
 # Locals are named constants that are reusable within the configuration.
 # Loading the common and env variables
 locals {
-  # Automatically load variables common to all environments (dev, qa)
+  # Automatically load and merge config
   common_vars = read_terragrunt_config(find_in_parent_folders("common.hcl"))
 
   # Automatically load environment scoped variables
@@ -12,21 +12,24 @@ locals {
   # Automatically load AWS region scoped variables
   region_vars = read_terragrunt_config(find_in_parent_folders("region.hcl"))
 
+  # Merge all the variables to allow overriding local variables
+  merged_local_vars = merge (
+    local.common_vars.locals,
+    local.env_vars.locals,
+    local.region_vars.locals
+  )
+
   # Define as Terragrunt local vars to make it easier to use and change
-  project_name     = local.common_vars.locals.project_name
-  app_id           = local.common_vars.locals.app_id
-  environment_name = local.env_vars.locals.environment_name
-  aws_region       = local.region_vars.locals.aws_region
-  terraform_infra_region = local.env_vars.locals.terraform_infra_region
+  project_name     = local.merged_local_vars.project_name
+  app_id           = local.merged_local_vars.app_id
+  environment_name = local.merged_local_vars.environment_name
+  aws_region       = local.merged_local_vars.aws_region
+  terraform_infra_region = local.merged_local_vars.terraform_infra_region
 }
 
 # Using the common, env, and region variables as input for the Terraform modules
 # Replaces duplicate terraform.tfvars files and Terraform modules configuration
-inputs = merge (
-  local.common_vars.locals,
-  local.env_vars.locals,
-  local.region_vars.locals
-)
+inputs = local.merged_local_vars
 
 # Common Terraform remote state that can be reused by all modules
 # Replaces duplicate providers.tf terraform backend

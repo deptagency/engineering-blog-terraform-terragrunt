@@ -26,7 +26,7 @@ locals {
   module_name = "simple_s3"
   module_source_url = "${local.base_module_source_url}/${local.module_name}"
 
-  bucket_name = "${local.env_vars.locals.environment_name}-${local.common_vars.locals.app_id}-bucket"
+  bucket_name = "${local.merged_local_vars.environment_name}-${local.merged_local_vars.app_id}-bucket"
 }
 
 inputs = {
@@ -39,6 +39,6 @@ inputs = {
 # deployed version.
 terraform {
   # For dev and local development, it is convenient to use local directories for modules
-  source = "../../../../..//modules/${local.module_name}"
-  #source = "${local.module_source_url}?ref=main"
+  # source = "../../../../..//modules/${local.module_name}"
+  source = "${local.module_source_url}?ref=main"
 }
