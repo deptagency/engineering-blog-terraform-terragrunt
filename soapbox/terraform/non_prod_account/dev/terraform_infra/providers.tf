@@ -13,13 +13,13 @@ terraform {
 
   # See README.md for usage
   # Note: Terraform does not allow usage of variables in the backend config
-  //  backend "s3" {
-  //    bucket         = "dev-terraform-soapbox-tfstate-s3"
-  //    region         = "us-east-2"
-  //    key            = "terraform/non_prod_account/dev/terraform_infra/terraform.tfstate"
-  //    dynamodb_table = "dev-terraform-soapbox-tfstate-dynamodb"
-  //    encrypt        = true
-  //  }
+//  backend "s3" {
+//    bucket         = "dev-soapbox-terraform-tfstate-s3"
+//    region         = "us-east-2"
+//    key            = "terraform/non_prod_account/dev/terraform_infra/terraform.tfstate"
+//    dynamodb_table = "dev-soapbox-terraform-tfstate-dynamodb"
+//    encrypt        = true
+//  }
 }
 
 provider "aws" {

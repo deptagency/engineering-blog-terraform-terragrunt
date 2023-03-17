@@ -11,4 +11,4 @@ Steps to Run
 1. `terraform init`
 2. `terraform apply`. Enter "yes" to create backend infra
 3. Uncomment the  _**backend "s3"**_ section in providers.tf
-4. Run `terraform apply` again to migrate local Terraform state to the newly created remote state
+4. Run ` terraform init -migrate-state` to migrate local Terraform state to the newly created remote state
