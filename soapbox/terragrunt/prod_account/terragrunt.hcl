@@ -20,7 +20,7 @@ locals {
   terraform_infra_region = local.env_vars.locals.terraform_infra_region
 }
 
-# Using the common and env variables as input for the Terraform modules
+# Using the common, env, and region variables as input for the Terraform modules
 # Replaces duplicate terraform.tfvars files and Terraform modules configuration
 inputs = merge (
 local.common_vars.locals,
