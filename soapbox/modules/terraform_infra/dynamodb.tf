@@ -1,5 +1,5 @@
 resource "aws_dynamodb_table" "tfstate_dynamodb" {
-  name     = "${var.environment_name}-${var.app_id}-tfstate-dynamodb"
+  name     = "${local.name_prefix}-tfstate-dynamodb"
   hash_key = "LockID"
   # On-demand PAY_PER_REQUEST is cheaper for Terraform since there are infrequent requests
   billing_mode   = "PAY_PER_REQUEST"
@@ -12,6 +12,6 @@ resource "aws_dynamodb_table" "tfstate_dynamodb" {
   }
 
   tags = {
-    Name = "${var.app_id} ${var.environment_name} Terraform tfstate dynamodb"
+    Name = "${local.name_prefix} Terraform tfstate dynamodb"
   }
 }
