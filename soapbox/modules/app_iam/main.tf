@@ -22,7 +22,7 @@ resource "aws_iam_role" "ec2_role" {
 }
 
 resource "aws_iam_instance_profile" "ec2_instance_profile" {
-  name = "${local.name_prefix}-ec2-instance-profile"
+  name = aws_iam_role.ec2_role.name
   role = aws_iam_role.ec2_role.name
 }
 
