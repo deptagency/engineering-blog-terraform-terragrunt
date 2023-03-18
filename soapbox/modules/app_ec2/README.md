@@ -1,0 +1,1 @@
+This module creates the application EC2

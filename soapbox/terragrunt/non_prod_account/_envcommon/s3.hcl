@@ -14,7 +14,7 @@ locals {
   region_vars = read_terragrunt_config(find_in_parent_folders("region.hcl"))
 
   # Merge all the variables to allow overriding local variables
-  merged_local_vars = merge (
+  merged_local_vars = merge(
     local.common_vars.locals,
     local.env_vars.locals,
     local.region_vars.locals
@@ -23,8 +23,8 @@ locals {
   # Expose the base source URL so different versions of the module can be deployed in different environments. This will
   # be used to construct the terraform block in the child Terragrunt configurations.
   base_module_source_url = local.merged_local_vars.base_module_source_url
-  module_name = "simple_s3"
-  module_source_url = "${local.base_module_source_url}/${local.module_name}"
+  module_name            = "simple_s3"
+  module_source_url      = "${local.base_module_source_url}/${local.module_name}"
 
   bucket_name = "${local.env_vars.locals.environment_name}-${local.common_vars.locals.app_id}-bucket"
 }

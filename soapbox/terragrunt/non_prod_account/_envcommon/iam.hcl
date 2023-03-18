@@ -14,7 +14,7 @@ locals {
   region_vars = read_terragrunt_config(find_in_parent_folders("region.hcl"))
 
   # Merge all the variables to allow overriding local variables
-  merged_local_vars = merge (
+  merged_local_vars = merge(
     local.common_vars.locals,
     local.env_vars.locals,
     local.region_vars.locals
@@ -23,8 +23,8 @@ locals {
   # Expose the base source URL so different versions of the module can be deployed in different environments. This will
   # be used to construct the terraform block in the child Terragrunt configurations.
   base_module_source_url = local.merged_local_vars.base_module_source_url
-  module_name = "app_iam"
-  module_source_url = "${local.base_module_source_url}/${local.module_name}"
+  module_name            = "app_iam"
+  module_source_url      = "${local.base_module_source_url}/${local.module_name}"
 
   bucket_terragrunt_path = local.merged_local_vars.bucket_terragrunt_path
 }
@@ -53,8 +53,8 @@ dependency "lookup_s3_module" {
     id = "mock-s3-bucket-name"
   }
   mock_outputs_allowed_terraform_commands = ["validate"]
-  mock_outputs_merge_with_state = true
-  skip_outputs = false
+  mock_outputs_merge_with_state           = true
+  skip_outputs                            = false
 }
 
 # This is an example of both using the above dependency block outputs and

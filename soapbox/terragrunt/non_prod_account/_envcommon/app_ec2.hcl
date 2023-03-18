@@ -23,8 +23,10 @@ locals {
   # Expose the base source URL so different versions of the module can be deployed in different environments. This will
   # be used to construct the terraform block in the child Terragrunt configurations.
   base_module_source_url = local.merged_local_vars.base_module_source_url
-  module_name            = "simple_vpc"
+  module_name            = "app_ec2"
   module_source_url      = "${local.base_module_source_url}/${local.module_name}"
+
+  iam_terragrunt_path = local.merged_local_vars.iam_terragrunt_path
 }
 
 # Terragrunt will copy the Terraform configurations specified by the source parameter, along with any files in the
@@ -36,4 +38,12 @@ terraform {
   # terragrunt apply --terragrunt-source=../../../../..//modules/simple_vpc
   source = "../../../../..//modules/${local.module_name}"
   #source = "${local.module_source_url}?ref=main"
+}
+
+# The app-main module is dependent on both the vpc and IAM modules completing first
+# By defining dependencies, Terragrunt run-all will run the Terraform modules in the correct order.
+# Without Terragrunt, you would have to hard-code the execution order of the Terraform module
+# in a Bash script
+dependencies {
+  paths = ["../vpc", "${local.iam_terragrunt_path}"]
 }

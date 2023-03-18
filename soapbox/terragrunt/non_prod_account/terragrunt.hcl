@@ -13,17 +13,17 @@ locals {
   region_vars = read_terragrunt_config(find_in_parent_folders("region.hcl"))
 
   # Merge all the variables to allow overriding local variables
-  merged_local_vars = merge (
+  merged_local_vars = merge(
     local.common_vars.locals,
     local.env_vars.locals,
     local.region_vars.locals
   )
 
   # Define as Terragrunt local vars to make it easier to use and change
-  project_name     = local.merged_local_vars.project_name
-  app_id           = local.merged_local_vars.app_id
-  environment_name = local.merged_local_vars.environment_name
-  aws_region       = local.merged_local_vars.aws_region
+  project_name           = local.merged_local_vars.project_name
+  app_id                 = local.merged_local_vars.app_id
+  environment_name       = local.merged_local_vars.environment_name
+  aws_region             = local.merged_local_vars.aws_region
   terraform_infra_region = local.merged_local_vars.terraform_infra_region
 }
 
@@ -43,14 +43,14 @@ remote_state {
   # In Terragrunt, the path_relative_to_include() function can ensure that the backed key is dynamic.
   # In Terraform, the unique backend key must be hard-coded for each configuration.
   config = {
-    bucket = "${local.environment_name}-${local.app_id}-tfstate-s3"
-    region = local.terraform_infra_region
-    key = "${path_relative_to_include()}/terraform.tfstate"
+    bucket         = "${local.environment_name}-${local.app_id}-tfstate-s3"
+    region         = local.terraform_infra_region
+    key            = "${path_relative_to_include()}/terraform.tfstate"
     dynamodb_table = "${local.environment_name}-${local.app_id}-tfstate-dynamodb"
-    encrypt = true
+    encrypt        = true
   }
   generate = {
-    path = "terragrunt-generated-backend.tf"
+    path      = "terragrunt-generated-backend.tf"
     if_exists = "overwrite_terragrunt"
   }
 }
@@ -61,9 +61,9 @@ remote_state {
 generate "provider" {
   # This is using the Terraform built-in override file functionality
   # https://www.terraform.io/language/files/override
-  path = "providers_override.tf"
+  path      = "providers_override.tf"
   if_exists = "overwrite_terragrunt"
-  contents = <<EOF
+  contents  = <<EOF
 # In a professional setting, a hard-pin of terraform versions ensures all
 # team members use the same version, reducing state conflict
 terraform {
@@ -104,7 +104,7 @@ terraform {
 
   # Force Terraform to run with increased parallelism
   extra_arguments "parallelism" {
-    commands = get_terraform_commands_that_need_parallelism()
+    commands  = get_terraform_commands_that_need_parallelism()
     arguments = ["-parallelism=15"]
   }
   # Force Terraform to keep trying to acquire a lock for up to 3 minutes if someone else already has the lock
@@ -117,26 +117,26 @@ terraform {
   # In the real world, you can use before,after,error hooks to post on Slack or CloudWatch to
   # monitor environment changes
   before_hook "before_plan_apply_hook" {
-    commands     = ["plan", "apply"]
-    execute      = ["echo", "START Terragrunt execution"]
+    commands = ["plan", "apply"]
+    execute  = ["echo", "START Terragrunt execution"]
   }
   after_hook "after_plan_apply_hook" {
-    commands     = ["plan", "apply"]
-    execute      = ["echo", "FINISH Terragrunt execution"]
+    commands = ["plan", "apply"]
+    execute  = ["echo", "FINISH Terragrunt execution"]
   }
 
   before_hook "before_destroy_hook" {
-    commands     = ["destroy"]
-    execute      = ["echo", "START Terragrunt destroy"]
+    commands = ["destroy"]
+    execute  = ["echo", "START Terragrunt destroy"]
   }
   after_hook "after_destroy_hook" {
-    commands     = ["destroy"]
-    execute      = ["echo", "FINISH Terragrunt destroy"]
+    commands = ["destroy"]
+    execute  = ["echo", "FINISH Terragrunt destroy"]
   }
 
   error_hook "on_error_hook" {
-    commands     = ["plan", "apply", "destroy"]
-    execute      = ["echo", "ERROR running Terragrunt"]
+    commands = ["plan", "apply", "destroy"]
+    execute  = ["echo", "ERROR running Terragrunt"]
     on_errors = [
       ".*",
     ]
@@ -151,5 +151,5 @@ terraform {
 //  "(?s).*Error installing provider.*tcp.*connection reset by peer.*",
 //  "(?s).*ssh_exchange_identification.*Connection closed by remote host.*"
 //]
-retry_max_attempts = 3
+retry_max_attempts       = 3
 retry_sleep_interval_sec = 5
