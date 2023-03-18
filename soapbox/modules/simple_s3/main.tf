@@ -1,10 +1,11 @@
 resource "aws_s3_bucket" "this" {
   bucket = var.bucket_name
 
-  # By default var.allow_destroy is false to prevent accidental destruction of S3 bucket
-  force_destroy = false
+  # In production, force_destroy is false and prevent_destroy is true to prevent accidental destruction of S3 bucket
+  # For the demo, we set it the opposite so we can easily destroy the bucket when done
+  force_destroy = true
   lifecycle {
-    prevent_destroy = true
+    prevent_destroy = false
   }
 
   tags = {
