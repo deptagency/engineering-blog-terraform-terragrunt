@@ -1,7 +1,7 @@
 # Configuration variables for the region
 locals {
   aws_region = "us-east-2"
-  cidr       =  "10.10.0.0/16"
+  cidr       = "10.10.0.0/16"
 
   # Note that terraform.tfvars cannot interpolate variables so the azs would have
   # hard-coded values, like us-east-1a and us-east-1b
