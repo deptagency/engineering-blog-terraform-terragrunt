@@ -6,8 +6,6 @@ locals {
   environment_name       = "dev"
   terraform_infra_region = "us-east-1"
 
-  iam_terragrunt_path = "${get_original_terragrunt_dir()}/../../global/iam"
-
   server_count = 1
   server_type  = "t2.nano"
 }

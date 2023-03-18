@@ -26,7 +26,8 @@ locals {
   module_name = "app_iam"
   module_source_url = "${local.base_module_source_url}/${local.module_name}"
 
-  bucket_terragrunt_path = local.merged_local_vars.bucket_terragrunt_path
+  bucket_region_dir      = replace(local.merged_local_vars.aws_region, "-", "_")
+  bucket_terragrunt_path = "${get_original_terragrunt_dir()}/../../${local.bucket_region_dir}/s3"
 }
 
 # Terragrunt will copy the Terraform configurations specified by the source parameter, along with any files in the

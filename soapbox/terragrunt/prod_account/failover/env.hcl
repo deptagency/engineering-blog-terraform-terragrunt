@@ -3,9 +3,9 @@
 # Seeing all the dev environment variables in one place make it easier to
 # understand and configure the whole environment
 locals {
-  environment_name       = "qa"
-  terraform_infra_region = "us-west-1"
+  environment_name       = "failover"
+  terraform_infra_region = "us-west-2"
 
-  server_count = 2
-  server_type  = "t2.micro"
+  server_count = 3
+  server_type  = "t3.micro"
 }

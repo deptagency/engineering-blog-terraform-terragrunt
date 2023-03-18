@@ -6,8 +6,6 @@ locals {
   environment_name       = "prod"
   terraform_infra_region = "us-east-2"
 
-  iam_terragrunt_path = "${get_original_terragrunt_dir()}/../../global/iam"
-
   server_count = 3
   server_type  = "t3.micro"
 }

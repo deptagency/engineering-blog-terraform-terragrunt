@@ -6,8 +6,6 @@ include "root" {
 # Include the envcommon configuration for the component. The _envcommon/vpc.hcl configuration contains VPC settings
 # that are common across all non-prod environments (dev, qa).
 include "envcommon" {
-  path           = "${dirname(find_in_parent_folders())}/_envcommon/iam.hcl"
-  expose         = true
-  merge_strategy = "shallow"
+  path   = "${dirname(find_in_parent_folders())}/_envcommon/iam.hcl"
+  expose = true
 }
-

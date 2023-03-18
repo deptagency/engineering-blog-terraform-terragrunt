@@ -26,7 +26,7 @@ locals {
   module_name            = "app_ec2"
   module_source_url      = "${local.base_module_source_url}/${local.module_name}"
 
-  iam_terragrunt_path = local.merged_local_vars.iam_terragrunt_path
+  iam_terragrunt_path = "${get_original_terragrunt_dir()}/../../global/iam"
 }
 
 # Terragrunt will copy the Terraform configurations specified by the source parameter, along with any files in the
