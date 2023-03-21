@@ -8,8 +8,9 @@ module "terraform_simple_vpc" {
   name = "${local.name_prefix}-vpc"
   cidr = var.cidr
 
-  azs            = var.azs
-  public_subnets = var.public_subnets
+  azs                  = var.azs
+  public_subnets       = var.public_subnets
+  public_subnet_suffix = "subnet-public"
 
   enable_ipv6             = false
   map_public_ip_on_launch = true
@@ -21,9 +22,6 @@ module "terraform_simple_vpc" {
 
   igw_tags = {
     Name = "${local.name_prefix}-igw"
-  }
-  public_subnet_tags = {
-    Name = "${local.name_prefix}-subnet-public"
   }
   public_route_table_tags = {
     Name = "${local.name_prefix}-route-table-public"
