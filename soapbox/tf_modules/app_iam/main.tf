@@ -63,6 +63,12 @@ resource "aws_iam_role_policy_attachment" "ec2_role_attach_ssm_access" {
   policy_arn = data.aws_iam_policy.ssm_access.arn
 }
 
+
+resource "aws_iam_role_policy_attachment" "ec2_role_attach_cloudwatch" {
+  role       = aws_iam_role.ec2_role.id
+  policy_arn = data.aws_iam_policy.cloudwatch.arn
+}
+
 resource "aws_iam_role_policy_attachment" "ec2_role_attach_s3_access" {
   role       = aws_iam_role.ec2_role.id
   policy_arn = aws_iam_policy.app_s3_access.arn

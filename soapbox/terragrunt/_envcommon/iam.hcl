@@ -1,4 +1,4 @@
-# This is the common component configuration for iam
+# This is the common component configuration for IAM
 
 # Locals are named constants that are reusable within the configuration.
 locals {
@@ -25,7 +25,7 @@ locals {
   module_source_local          = "${local.base_module_source_local_dir}/${local.module_name}"
 
   # S3 bucket Terragrunt path for dependency and dependencies block
-  bucket_terragrunt_path = "${get_original_terragrunt_dir()}/../s3"
+  s3_terragrunt_path = "${get_original_terragrunt_dir()}/../s3"
 }
 
 # Terragrunt dependency and dependencies blocks are different.
@@ -34,7 +34,7 @@ locals {
 # The dependencies block is to ensure Terragrunt run-all executes the apply in the correct module order
 # https://terragrunt.gruntwork.io/docs/features/execute-terraform-commands-on-multiple-modules-at-once/#dependencies-between-modules
 dependency "lookup_s3_module" {
-  config_path = "${local.bucket_terragrunt_path}"
+  config_path = "${local.s3_terragrunt_path}"
 
   # Mock outputs are for when the state of the dependency module is not created yet
   # This way "terragrunt validate" will not fail from missing state
@@ -70,5 +70,5 @@ terraform {
 # Without Terragrunt, you would have to hard-code the execution order of the Terraform module
 # in a Bash script
 dependencies {
-  paths = ["${local.bucket_terragrunt_path}"]
+  paths = ["${local.s3_terragrunt_path}"]
 }

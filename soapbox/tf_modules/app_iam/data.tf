@@ -1,5 +1,9 @@
 data "aws_iam_policy" "ssm_access" {
-  name = "AmazonSSMFullAccess"
+  name = "AmazonSSMManagedInstanceCore"
+}
+
+data "aws_iam_policy" "cloudwatch" {
+  name = "CloudWatchAgentServerPolicy"
 }
 
 # This lookup of the S3 bucket on AWS ensures that it exists

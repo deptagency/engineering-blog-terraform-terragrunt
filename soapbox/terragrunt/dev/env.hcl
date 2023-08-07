@@ -35,6 +35,12 @@ locals {
   iam_tags = {
     app-role    = "security"
   }
-  #  server_count = 1
-  #  server_type  = "t2.nano"
+
+  # EC2 variables
+  ec2_prefix = "${local.app_id}-ec2-${local.environment_name}"
+  server_count = 1
+  server_type  = "t2.nano"
+  ec2_tags = {
+    app-role    = "compute"
+  }
 }
