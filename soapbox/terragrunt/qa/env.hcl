@@ -21,6 +21,15 @@ locals {
   vpc_tags = {
     app-role    = "networking"
   }
+
+  # S3 variables
+  s3_bucket_name = "${local.app_id}-s3-${local.environment_name}"
+  s3_random_suffix = true
+  s3_force_destroy = true
+  s3_tags = {
+    app-role    = "datastore"
+  }
+
   #  server_count = 1
   #  server_type  = "t2.nano"
 }

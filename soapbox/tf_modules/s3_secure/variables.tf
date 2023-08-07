@@ -21,18 +21,19 @@ variable "tags" {
 # Module variables
 # ----------------------------------------------------------------------------------------------------------------------
 
-variable "vpc_name" {
+variable "s3_bucket_name" {
   type        = string
-  description = "Name of VPC"
+  description = "Name of S3 bucket"
 }
 
-variable "vpc_cidr" {
-  type        = string
-  description = "The IPv4 CIDR of the VPC"
+variable "s3_force_destroy" {
+  type        = bool
+  description = "(Optional, Default:false ) A boolean that indicates all objects should be deleted from the bucket so that the bucket can be destroyed without error. These objects are not recoverable."
+  default     = false
 }
 
-variable "number_of_azs" {
-  type        = number
-  description = "The number of Availability Zones of the VPC"
-  default     = 3
+variable "s3_random_suffix" {
+  type        = bool
+  description = "(Optional, Default:false ) A boolean that appends a random string suffix to S3 bucket name. Prevents bucket name clashes."
+  default     = false
 }

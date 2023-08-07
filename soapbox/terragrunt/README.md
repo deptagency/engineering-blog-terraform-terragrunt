@@ -1,7 +1,7 @@
 ## Goals
 The goals of the Terragrunt directory structure, in order of importance
 
-1. Change one environment without affecting another, especially prod
+1. Change one environment without affecting another
 2. DRY - Don't Repeat Yourself
    Keep Terragrunt configuration in one place without repeating the same info in multiple files
 3. Isolate production Terragrunt into its own directory structure separate from non-production environments.
