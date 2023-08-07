@@ -3,5 +3,4 @@
 locals {
   project_name           = "engineering-blog-terraform-terragrunt"
   app_id                 = "soapbox-terragrunt"
-  base_module_source_url = "github.com/deptagency/engineering-blog-terraform-terragrunt//soapbox/modules"
 }

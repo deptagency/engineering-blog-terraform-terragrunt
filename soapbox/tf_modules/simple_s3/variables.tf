@@ -8,7 +8,7 @@ variable "app_id" {
   description = "Name of application"
 }
 
-variable "bucket_name" {
+variable "bucket_name_suffix" {
   type        = string
-  description = "Name of S3 bucket"
+  description = "Suffix Name of S3 bucket"
 }

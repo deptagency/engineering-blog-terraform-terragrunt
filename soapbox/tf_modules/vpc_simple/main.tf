@@ -1,15 +1,15 @@
 ################################################################################
 # VPC Module
 ################################################################################
-module "terraform_simple_vpc" {
+module "vpc_simple" {
   source  = "terraform-aws-modules/vpc/aws"
-  version = "3.19.0"
+  version = "5.0.0"
 
-  name = "${local.name_prefix}-vpc"
-  cidr = var.cidr
+  name = local.vpc_name
+  cidr = var.vpc_cidr
 
-  azs                  = var.azs
-  public_subnets       = var.public_subnets
+  azs                  = local.azs
+  public_subnets       = [for k, v in local.azs : cidrsubnet(var.vpc_cidr, 8, k)]
   public_subnet_suffix = "subnet-public"
 
   enable_ipv6             = false
@@ -20,10 +20,12 @@ module "terraform_simple_vpc" {
   create_egress_only_igw = false
   enable_nat_gateway     = false
 
+  default_network_acl_name    = local.default_network_acl_name
+  default_route_table_name    = local.default_route_table_name
+  default_security_group_name = local.default_security_group_name
   igw_tags = {
-    Name = "${local.name_prefix}-igw"
+    Name = local.igw_name
   }
-  public_route_table_tags = {
-    Name = "${local.name_prefix}-route-table-public"
-  }
+
+  tags = var.tags
 }
