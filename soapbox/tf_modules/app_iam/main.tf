@@ -1,6 +1,5 @@
 resource "aws_iam_role" "ec2_role" {
-  name        = "${local.name_prefix}-ec2-role"
-  path        = "/${var.project_name}/"
+  name        = local.iam_ec2_role_name
   description = "Role for EC2 for app ${var.app_id} in ${var.environment_name}"
 
   # Terraform's "jsonencode" function converts a
@@ -19,6 +18,8 @@ resource "aws_iam_role" "ec2_role" {
       }
     ]
   })
+
+  tags = merge({ Name = local.iam_ec2_role_name }, var.tags)
 }
 
 resource "aws_iam_instance_profile" "ec2_instance_profile" {
@@ -27,8 +28,7 @@ resource "aws_iam_instance_profile" "ec2_instance_profile" {
 }
 
 resource "aws_iam_policy" "app_s3_access" {
-  name        = "${local.name_prefix}-app-s3-policy"
-  path        = "/${var.project_name}/"
+  name        = local.iam_s3_policy_name
   description = "Policy for S3 access for app ${var.app_id} in ${var.environment_name}"
 
   policy = jsonencode({
@@ -50,6 +50,8 @@ resource "aws_iam_policy" "app_s3_access" {
       }
     ]
   })
+
+  tags = merge({ Name = local.iam_s3_policy_name }, var.tags)
 }
 
 # aws_iam_policy_attachment has clunky production usage over detaching policies

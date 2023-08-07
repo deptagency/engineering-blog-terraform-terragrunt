@@ -30,6 +30,12 @@ locals {
     app-role    = "datastore"
   }
 
+  # IAM variables
+  iam_prefix = "${local.app_id}-iam-${local.environment_name}"
+  iam_tags = {
+    app-role    = "security"
+  }
+
   #  server_count = 1
   #  server_type  = "t2.nano"
 }
