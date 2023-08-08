@@ -42,7 +42,7 @@ dependency "lookup_iam_module" {
   # Mock outputs are for when the state of the dependency module is not created yet
   # This way "terragrunt validate" will not fail from missing state
   mock_outputs = {
-    id = "mock-iam-instance-profile-name"
+    ec2_instance_profile_name = "mock-iam-instance-profile-name"
   }
   mock_outputs_allowed_terraform_commands = ["validate"]
   mock_outputs_merge_with_state           = true
