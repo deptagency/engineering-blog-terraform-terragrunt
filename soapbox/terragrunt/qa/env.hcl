@@ -12,7 +12,6 @@ locals {
   app_id       = "soapbox-terragrunt"
   owner        = "jirawat.uttayaya@deptagency.com"
   cost_center  = "DEPT"
-  app-purpose  = "blog demo"
 
   # VPC variables
   vpc_name      = "${local.app_id}-vpc-${local.environment_name}"

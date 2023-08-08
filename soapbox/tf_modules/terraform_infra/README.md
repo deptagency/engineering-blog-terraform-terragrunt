@@ -1,1 +1,0 @@
-Create terraform S3 and DynamoDB state infrastructure
