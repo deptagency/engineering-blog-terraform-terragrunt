@@ -10,5 +10,11 @@ owner        = "jirawat.uttayaya@deptagency.com"
 cost_center  = "DEPT"
 
 tags = {
-  app-role = "terraform-infra"
+  app-role = "datastore"
 }
+
+# Note that terraform.tfvars are constants and cannot interpolate other variables
+# So you have to hardcode and duplicate if you want to use the values of app_id and environment_name
+s3_bucket_name   = "soapbox-terraform-s3-dev"
+s3_random_suffix = true
+s3_force_destroy = true

@@ -14,7 +14,7 @@ variable "aws_region" {
 
 # For AWS Tags
 variable "project_name" {
-  type       = string
+  type        = string
   description = "Name of project"
 }
 
@@ -30,13 +30,13 @@ variable "tags" {
 }
 
 variable "owner" {
-    type        = string
-    description = "Owner of the infrastructure"
+  type        = string
+  description = "Owner of the infrastructure"
 }
 
 variable "cost_center" {
-    type        = string
-    description = "Cost center of the infrastructure"
+  type        = string
+  description = "Cost center of the infrastructure"
 }
 
 # ----------------------------------------------------------------------------------------------------------------------

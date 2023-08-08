@@ -15,4 +15,6 @@ module "terraform_infra" {
   # of the root terragrunt/terragrunt.hcl
   environment_name = var.environment_name
   app_id           = var.app_id
+
+  tags = var.tags
 }

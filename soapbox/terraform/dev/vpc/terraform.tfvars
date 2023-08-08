@@ -4,14 +4,13 @@ environment_name = "dev"
 aws_region       = "us-east-1"
 
 # Default AWS Tags
-project_name     = "engineering-blog-terraform-terragrunt"
-## Change app_id to generate a unique S3 bucket backend
-app_id           = "soapbox-terraform"
-owner            = "jirawat.uttayaya@deptagency.com"
-cost_center      = "DEPT"
+project_name = "engineering-blog-terraform-terragrunt"
+app_id       = "soapbox-terraform"
+owner        = "jirawat.uttayaya@deptagency.com"
+cost_center  = "DEPT"
 
 tags = {
-  app-role    = "networking"
+  app-role = "networking"
 }
 
 # Note that terraform.tfvars are constants and cannot interpolate other variables

@@ -38,3 +38,24 @@ variable "cost_center" {
   type        = string
   description = "Cost center of the infrastructure"
 }
+
+# ----------------------------------------------------------------------------------------------------------------------
+# Module variables
+# ----------------------------------------------------------------------------------------------------------------------
+
+variable "s3_bucket_name" {
+  type        = string
+  description = "Name of S3 bucket"
+}
+
+variable "s3_force_destroy" {
+  type        = bool
+  description = "(Optional, Default:false ) A boolean that indicates all objects should be deleted from the bucket so that the bucket can be destroyed without error. These objects are not recoverable."
+  default     = false
+}
+
+variable "s3_random_suffix" {
+  type        = bool
+  description = "(Optional, Default:false ) A boolean that appends a random string suffix to S3 bucket name. Prevents bucket name clashes."
+  default     = false
+}
