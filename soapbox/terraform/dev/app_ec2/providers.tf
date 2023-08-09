@@ -24,13 +24,13 @@ terraform {
   # in one root terragrunt/terragrunt.hcl
   # and variables can be used.
   # In addition, the Terragrunt path_relative_to_include() function can ensure that the backend key is dynamic.
-  #  backend "s3" {
-  #    bucket         = "soapbox-terraform-tfstate-s3-dev"
-  #    region         = "us-east-1"
-  #    key            = "terraform_infra/terraform.tfstate"
-  #    dynamodb_table = "soapbox-terraform-tfstate-dynamodb-dev"
-  #    encrypt        = true
-  #  }
+  backend "s3" {
+    bucket         = "soapbox-terraform-tfstate-s3-dev"
+    region         = "us-east-1"
+    key            = "app_ec2/terraform.tfstate"
+    dynamodb_table = "soapbox-terraform-tfstate-dynamodb-dev"
+    encrypt        = true
+  }
 }
 
 provider "aws" {
