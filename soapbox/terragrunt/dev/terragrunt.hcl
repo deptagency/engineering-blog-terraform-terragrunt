@@ -7,7 +7,7 @@ locals {
   common_vars = read_terragrunt_config(find_in_parent_folders("_envcommon/common.hcl"))
 
   # Automatically load environment -level variables
-  env_vars = read_terragrunt_config(find_in_parent_folders("env.hcl"))
+  env_vars = read_terragrunt_config(find_in_parent_folders("env.hcl", "env.hcl"))
 
   # Merge all the variables to allow overriding local variables
   merged_local_vars = merge(

@@ -7,6 +7,6 @@ include "root" {
 # The _envcommon/iam.hcl configuration contains IAM settings
 # that are common across all environments (dev, qa, prod).
 include "envcommon" {
-  path   = "${dirname(find_in_parent_folders())}/_envcommon/iam.hcl"
+  path   = "${dirname(find_in_parent_folders())}/../_envcommon/iam.hcl"
   expose = true
 }
