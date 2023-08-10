@@ -4,8 +4,7 @@ The goals of the Terragrunt directory structure, in order of importance
 1. Change one environment without affecting another
 2. DRY - Don't Repeat Yourself
    Keep Terragrunt configuration in one place without repeating the same info in multiple files
-3. Isolate production Terragrunt into its own directory structure separate from non-production environments.
-   Preventing accidental changes in production (Goal 1) has higher value that DRY (Goal 2)
+3. Preventing accidental changes in production (Goal 1) has higher value that DRY (Goal 2)
 4. Minimize unexpected change
    Instead of one big Terragrunt state with all the infrastructure in one monolithic directory, 
    we group and separate related infra into its own smaller Terragrunt state directory, i.e. vpc, iam, s3, rds, etc.
