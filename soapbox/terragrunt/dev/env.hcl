@@ -29,6 +29,14 @@ locals {
     app-role    = "datastore"
   }
 
+  # Messaging variables
+  sns_name = "${local.app_id}-sns-${local.environment_name}"
+  sqs_name_01 = "${local.app_id}-sqs-alpha-${local.environment_name}"
+  sqs_name_02 = "${local.app_id}-sqs-beta-${local.environment_name}"
+  messaging_tags = {
+    app-role    = "messaging"
+  }
+
   # IAM variables
   iam_prefix = "${local.app_id}-iam-${local.environment_name}"
   iam_tags = {

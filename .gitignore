@@ -30,3 +30,13 @@ override.tf.json
 
 # Local .terragrunt directories
 **/.terragrunt-cache/*
+
+# asdf
+.tool-versions
+
+# IntelliJ
+.idea
+*.iml
+
+# VSCode
+.vscode
