@@ -48,6 +48,7 @@ remote_state {
     dynamodb_table = "${local.aws_resource_prefix}-tfstate-dynamodb"
     encrypt        = true
   }
+
   generate = {
     path      = "terragrunt-generated-backend.tf"
     if_exists = "overwrite_terragrunt"
@@ -89,7 +90,7 @@ provider "aws" {
       cost-center = "${local.cost_center}"
 
       // Knowing who applied the Terraform change is useful for auditing and debugging
-      terragrunt-caller-id = get_aws_caller_identity_arn()
+      terragrunt-caller-id = "${get_aws_caller_identity_arn()}"
 
       // This tag helps AWS UI users discover what
       // Terragrunt git repo and directory to modify

@@ -3,7 +3,7 @@
 ################################################################################
 module "vpc_simple" {
   source  = "terraform-aws-modules/vpc/aws"
-  version = "5.0.0"
+  version = "5.1.2"
 
   name = local.vpc_name
   cidr = var.vpc_cidr
@@ -27,5 +27,10 @@ module "vpc_simple" {
     Name = local.igw_name
   }
 
-  tags = var.tags
+  tags = merge(
+    var.tags,
+    {
+      "terraform-caller" = data.aws_caller_identity.current.arn
+    }
+  )
 }

@@ -1,6 +1,6 @@
 locals {
   vpc_name                    = var.vpc_name
-  database_subnet_group_name  = "${local.vpc_name}-subnet-database-group"
+  database_subnet_group_name  = "${local.vpc_name}-subnet-db-group"
   default_network_acl_name    = "${local.vpc_name}-network-acl"
   default_route_table_name    = "${local.vpc_name}-route-table"
   default_security_group_name = "${local.vpc_name}-sg"
