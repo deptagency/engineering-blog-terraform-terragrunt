@@ -22,4 +22,9 @@ locals {
   vpc_tags = {
     app-role    = "networking"
   }
+
+  ecr_repo_names = ["${local.aws_resource_prefix}-healthcheck", "${local.project_name}-cognito"]
+  ecr_tags = {
+    app-role    = "application"
+  }
 }
