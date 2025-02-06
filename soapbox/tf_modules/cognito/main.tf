@@ -1,5 +1,5 @@
 resource "aws_cognito_user_pool" "this" {
-  name = var.user_pool_name
+  name = local.user_pool_fullname
   auto_verified_attributes = [
     "email",
   ]
@@ -86,4 +86,51 @@ resource "aws_cognito_identity_provider" "this" {
   attribute_mapping = {
     email = "email"
   }
+}
+
+resource "aws_cognito_user_pool_client" "this" {
+  name                                 = "${local.user_pool_fullname}-client"
+  user_pool_id                         = aws_cognito_user_pool.this.id
+  callback_urls                        = ["http://localhost:3001"]
+  allowed_oauth_flows_user_pool_client = true
+  allowed_oauth_flows                  = ["code", "implicit"]
+  allowed_oauth_scopes                 = ["email", "openid"]
+  supported_identity_providers         = [aws_cognito_identity_provider.this.provider_type]
+}
+
+resource "aws_cognito_identity_provider" "this" {
+  depends_on = [
+    aws_secretsmanager_secret_version.cognito_google_client_id,
+    aws_secretsmanager_secret_version.cognito_google_client_secret
+  ]
+  user_pool_id  = aws_cognito_user_pool.this.id
+  provider_name = "Google"
+  provider_type = "Google"
+
+  provider_details = {
+    authorize_scopes = "email"
+    client_id        = data.aws_secretsmanager_secret_version.cognito_google_client_id.secret_string
+    client_secret    = data.aws_secretsmanager_secret_version.cognito_google_client_secret.secret_string
+  }
+
+  attribute_mapping = {
+    email = "email"
+  }
+}
+
+resource "aws_cognito_identity_provider" "saml" {
+  user_pool_id  = aws_cognito_user_pool.this.id
+  provider_name = "rocket-idc-app01-jirawat"
+  provider_type = "SAML"
+
+#  provider_details = {
+#    authorize_scopes = "email"
+#    client_id        = data.aws_secretsmanager_secret_version.cognito_google_client_id.secret_string
+#    client_secret    = data.aws_secretsmanager_secret_version.cognito_google_client_secret.secret_string
+#  }
+#
+#  attribute_mapping = {
+#    email = "email"
+#  }
+  provider_details = {}
 }

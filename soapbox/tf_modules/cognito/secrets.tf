@@ -1,6 +1,6 @@
 # Google OAuth2 Client ID for Cognito Provider
 resource "aws_secretsmanager_secret" "cognito_google_client_id" {
-  name = "${local.name_prefix}-cognito-google-client-id"
+  name = "${local.user_pool_fullname}-google-client-id"
   tags = var.tags
 }
 
@@ -29,7 +29,7 @@ data "aws_secretsmanager_secret_version" "cognito_google_client_id" {
 
 # Google OAuth2 Client Secret for Cognito Provider
 resource "aws_secretsmanager_secret" "cognito_google_client_secret" {
-  name = "${local.name_prefix}-cognito-google-client-secret"
+  name = "${local.user_pool_fullname}-google-client-secret"
   tags = var.tags
 }
 
