@@ -1,7 +1,7 @@
 {
   "name": "hello-time-esm",
   "version": "1.0.0",
-  "description": "Example of caching secrets using NodeJS ES Modules and AWS Lambda Powertools",
+  "description": "AWS Lambda intro - Hello Time ECMAScript Modules version",
   "type": "module",
   "main": "index.mjs",
   "author": {
@@ -9,12 +9,9 @@
     "url": "https://engineering.deptagency.com/author/jirawat"
   },
   "license": "MIT-0",
-  "homepage": "https://github.com/deptagency/engineering-blog-terraform-terragrunt/serverless/secrets_manager",
+  "homepage": "https://github.com/deptagency/engineering-blog-terraform-terragrunt/serverless/apigw",
   "repository": {
     "type": "git",
     "url": "git+https://github.com/deptagency/engineering-blog-terraform-terragrunt.git"
-  },
-  "dependencies": {
-    "@aws-lambda-powertools/parameters": "^2.13.1"
   }
 }
