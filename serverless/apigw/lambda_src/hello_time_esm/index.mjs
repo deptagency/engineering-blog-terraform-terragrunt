@@ -13,6 +13,9 @@ export const handler = async ()=> {
   } catch (error) {
     console.error("Error in Hello Time JS", error);
 
-    return error;
+    return {
+      statusCode: 500,
+      body: JSON.stringify({ message: "Internal Server Error", error: error.message }),
+    };
   }
 };
