@@ -7,7 +7,7 @@ resource "aws_api_gateway_deployment" "serverless_demo" {
   rest_api_id = aws_api_gateway_rest_api.serverless_demo.id
 
   depends_on = [
-    aws_api_gateway_integration.hello_time_ems,
+    aws_api_gateway_integration.hello_time_esm,
   ]
 
   # Redeployment based on Terraform resource sha1 hash
@@ -18,7 +18,7 @@ resource "aws_api_gateway_deployment" "serverless_demo" {
     redeployment = join("",
       [
         filesha1("./apigateway.tf"),
-        filesha1("./apigateway_hello_time_ems.tf"),
+        filesha1("./apigateway_hello_time_esm.tf"),
       ]
     )
   }
